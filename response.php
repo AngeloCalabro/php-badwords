@@ -1,6 +1,7 @@
 <?php
 
 var_dump($_GET);
+var_dump($_GET['frase']);
 
 if (isset($_GET['nome']) && $_GET['nome'] != '') {
     $nome = $_GET['nome'];
@@ -18,6 +19,14 @@ $fraseArray = explode(' ', $frase);
 var_dump($fraseArray);
 
 $strLenFrase = strlen($frase);
+$worldLen = str_word_count($frase);
+
+for ($x = 0; $x < $worldLen; $x++) {
+    $pCensored = str_replace($x, '***', $x);
+
+    echo $pCensored;
+};
+// $pCensored = str_replace($worldLen, '***', $worldLen);
 
 ?>
 
@@ -42,11 +51,14 @@ $strLenFrase = strlen($frase);
 </head>
 
 <body>
-    <section class="d-flex justify-content-between">
+    <section class="container d-flex justify-content-between">
         <div>
             <?php echo "<h1>Ciao $nome</h1>" ?>
             <?php echo "<p><em>Questa è la frase che hai inserito:&nbsp;</em><br><b>$frase</b></p>" ?>
-            <?php echo "<p>La lunghezza della tua frase è di <b>$strLenFrase</b> caratteri</p>" ?>
+            <?php echo "<p>La tua frase ha <b>$strLenFrase</b> caratteri</p>" ?>
+            <?php echo "<p>La tua frase ha <b>$worldLen</b> parole</p>" ?>
+            <?php echo "<p>Questa è la parola censurata: <b>$pCensored</b></p>" ?>
+
         </div>
         <div>
             <a href="./index.php">Torna alla home</a>
