@@ -1,18 +1,34 @@
 <?php
+/*
+                ""	    "apple"	 NULL	FALSE	0	    undefined	    TRUE	array()	123
+                ------------------------------------------------------------------------------
+      isset	    TRUE	TRUE	 FALSE	TRUE	TRUE	FALSE	        TRUE	TRUE	TRUE
+      empty	    TRUE	FALSE	 TRUE	TRUE	TRUE	TRUE	        FALSE	TRUE	FALSE
+      is_null	FALSE	FALSE	 TRUE	FALSE	FALSE	Warning/ TRUE	FALSE	FALSE	FALSE
+*/
 
+$errore = null;
 var_dump($_GET);
 var_dump($_GET['frase']);
 
-if (isset($_GET['nome']) && $_GET['nome'] != '') {
+if (isset($_GET['nome']) && !empty($_GET['nome'] )) {
     $nome = $_GET['nome'];
 } else {
     $nome = 'Non ho il nome';
 };
 
-if (isset($_GET['frase']) && $_GET['frase'] != '') {
+// if (isset($_GET['frase']) && !empty($_GET['frase'] ))) {
+//     $frase = $_GET['frase'];
+// } else {
+//     $frase = 'Non ho una frase';
+// };
+
+if(isset($_GET['frase']) && isset($_GET['censura'])){
     $frase = $_GET['frase'];
+    $censura = $_GET['censura'];   
+    $pCensored = str_replace($censura, '***', $frase);
 } else {
-    $frase = 'Non ho una frase';
+    $errore = 'Valori non validi';
 };
 
 $fraseArray = explode(' ', $frase);
@@ -21,12 +37,11 @@ var_dump($fraseArray);
 $strLenFrase = strlen($frase);
 $worldLen = str_word_count($frase);
 
-for ($x = 0; $x < $worldLen; $x++) {
-    $pCensored = str_replace($x, '***', $x);
+// for ($x = 0; $x < $worldLen; $x++) {
+//     $pCensored = str_replace($x, '***', $x);
 
-    echo $pCensored;
-};
-// $pCensored = str_replace($worldLen, '***', $worldLen);
+//     echo $pCensored;
+// };
 
 ?>
 
@@ -53,12 +68,21 @@ for ($x = 0; $x < $worldLen; $x++) {
 <body>
     <section class="container d-flex justify-content-between">
         <div>
-            <?php echo "<h1>Ciao $nome</h1>" ?>
+            <!-- <?php echo "<h1>Ciao $nome</h1>" ?>
             <?php echo "<p><em>Questa è la frase che hai inserito:&nbsp;</em><br><b>$frase</b></p>" ?>
             <?php echo "<p>La tua frase ha <b>$strLenFrase</b> caratteri</p>" ?>
             <?php echo "<p>La tua frase ha <b>$worldLen</b> parole</p>" ?>
-            <?php echo "<p>Questa è la parola censurata: <b>$pCensored</b></p>" ?>
+            <?php echo "<p>Questa è la parola censurata: <b>$pCensored</b></p>" ?> -->
 
+            <?php if($errore){
+                    echo "<h1>$errore</h1>";
+                } else {
+                    echo "<h1>Ciao $nome</h1>";
+                    echo "<p><em>Questa è la frase che hai inserito:&nbsp;</em><br><b>$frase</b></p>";
+                    echo "<p>La tua frase ha <b>$strLenFrase</b> caratteri</p>";
+                    echo "<p>La tua frase ha <b>$worldLen</b> parole</p>";
+                    echo "<p>Questa è la frase censurata: <b>$pCensored</b></p>";
+                }?>
         </div>
         <div>
             <a href="./index.php">Torna alla home</a>

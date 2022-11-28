@@ -19,12 +19,15 @@
 </head>
 
 <body>
-    <form action="response.php" method="GET" class="container d-flex justify-content-center align-items-center">
+    <form action="response.php" method="GET" name="formCensura"
+        class="container d-flex justify-content-center align-items-center">
         <div class="text-center">
             <input type="text" class="form-control m-1" name="nome" placeholder="Inserisci il tuo nome" required>
             <textarea class="form-control m-1 text-area" name="frase" placeholder="Inserisci una frase"
                 required></textarea>
+            <input type="text" class="form-control m-1" name="censura" placeholder="Parola da censurare" required>
             <button type="submit" class="btn btn-primary m-1 px-3">Invia</button>
+            <button type="reset" class="btn btn-warning m-1 px-3">Cancella</button>
         </div>
     </form>
 
